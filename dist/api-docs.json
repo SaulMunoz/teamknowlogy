@@ -1,0 +1,162 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "description": "Test for dna matrix and stats of comparison.",
+      "version": "1.0.0",
+      "title": "DNA Mutations seeker NXN",
+      "termsOfService": "http://swagger.io/terms/",
+      "contact": {
+        "email": "saul.munoz@gmail.com"
+      },
+      "license": {
+        "name": "Apache 2.0",
+        "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+      }
+    },
+    "host": "localhost:4100",
+    "basePath": "/",
+    "tags": [
+      {
+        "name": "mutation",
+        "description": "DNA Function to find mutations on DNA Matrix",
+        "externalDocs": {
+          "description": "",
+          "url": "http://swagger.io"
+        }
+      },
+      {
+        "name": "stats",
+        "description": "Access to statistics of DNA mutations seeker"
+      }
+    ],
+    "schemes": [
+      "https",
+      "http"
+    ],
+    "paths": {
+      "/stats/": {
+        "get": {
+          "tags": [
+            "stats"
+          ],
+          "summary": "Search statistics for Mutations ",
+          "description": "Multiple arrays can be validated if forma NXN",
+          "operationId": "stats",
+          "produces": [
+            "application/xml",
+            "application/json"
+          ],
+          "responses": {
+            "200": {
+              "description": "successful operation",
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/definitions/stats"
+                }
+              }
+            },
+            "400": {
+              "description": "Invalid status value"
+            }
+          }
+        }
+      },
+      "/mutation/": {
+        "post": {
+          "tags": [
+            "mutation"
+          ],
+          "summary": "Search for mutation in DNA chain",
+          "description": "",
+          "operationId": "mutation",
+          "produces": [
+            "application/xml",
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "in": "body",
+              "name": "dna",
+              "description": "dna matrix [NXN]",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/dna",
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Mutation found",
+              "schema": {
+                "$ref": "#/definitions/status"
+              }
+            },
+            "403": {
+              "description": "Mutation not found"
+            }
+          }
+        }
+      }
+    },
+    "definitions": {
+      "dna": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "array",
+            "xml": {
+              "name": "dna",
+              "wrapped": true
+            },
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "xml": {
+          "name": "dna"
+        }
+      },
+      "status": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "example": "Enviado"
+          }
+        },
+        "xml": {
+          "name": "dna"
+        }
+      },
+      "stats": {
+        "type": "object",
+        "properties": {
+          "count_mutations": {
+            "type": "string",
+            "example": "40"
+          },
+          "count_no_mutation": {
+            "type": "string",
+            "example": "100"
+          },
+          "ratio": {
+            "type": "number",
+            "example": 0.4
+          }
+        },
+        "xml": {
+          "name": "stats"
+        }
+      }
+    },
+    "externalDocs": {
+      "description": "Find out more about Swagger",
+      "url": "http://swagger.io"
+    }
+  }
