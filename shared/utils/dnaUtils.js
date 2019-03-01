@@ -8,7 +8,7 @@ module.exports = function (expresion, arrayDNA) {
         var wordLength = 0;
         console.log('arrayCombinationsDNA', arrayCombinationsDNA.length);
 
-        if (matchInArray(expresion, arrayDNA)) {
+        if (matchInArrayToString(expresion, arrayDNA)) {
             console.log("Si Match", true);
             return true;
         } else {
@@ -23,13 +23,15 @@ module.exports = function (expresion, arrayDNA) {
 
 };
 
+
 /**
- * 
+ * Search pattern on elements of array
+ * 03/01/2019 
  * @param {*} string 
  * @param {*} expressions 
  */
 function matchInArray(patternMatch, arrayCombinations) {
-
+    
     var len = arrayCombinations.length,
         i = 0;
 
@@ -40,6 +42,28 @@ function matchInArray(patternMatch, arrayCombinations) {
         }
     }
 
+    return false;
+
+}
+
+/**
+ * join array in string without commmas, so pattern search only once
+ * 03/01/2019 
+ * @param {*} string 
+ * @param {*} expressions 
+ */
+function matchInArrayToString(patternMatch, arrayCombinations) {
+
+    
+    var len = arrayCombinations.length,
+        i = 0;
+    var stringCombinations = arrayCombinations.join("");
+
+    if (stringCombinations.match(patternMatch)) {
+        console.log("Si entró");
+        return true;
+    }
+    
     return false;
 
 }
