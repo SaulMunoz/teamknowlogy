@@ -44,7 +44,8 @@ For production release:
 ```sh
 $ npm build --prod
 ```
-##API
+## API
+
 ### Api Methods
 
 #### Mutation
