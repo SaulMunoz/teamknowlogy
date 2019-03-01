@@ -44,8 +44,10 @@ For production release:
 ```sh
 $ npm build --prod
 ```
+##API
+### Api Methods
 
-#### Api Methods
+#### Mutation
 Sending sequence of DNA by HTTP POST with a JSON with the next format:
 ```sh
 POST → /mutation/
@@ -55,7 +57,28 @@ POST → /mutation/
 ```
 in case api verifies mutation, the operation returns HTTP 200-OK, in case api dont't verifies mutation returns 403-Forbidden
 
+#### stats
+Sending sequence of DNA by HTTP POST with a JSON with the next format:
+```sh
+GET → /stats/
+```
+```sh
+Response → 
 
+{
+    "count_mutations": 2,
+    "count_no_mutation": 0,
+    "ratio": 2
+}
+
+```
+
+in case api verifies mutation, the operation returns HTTP 200-OK, in case api dont't verifies mutation returns 403-Forbidden
+
+POST → /mutation/
+{
+“dna”:["ATGCGA","CAGTGC","TTATGT","AGAAGG","CCCCTA","TCACTG"]
+}
 ### Todos
 
  - Add security to access api
