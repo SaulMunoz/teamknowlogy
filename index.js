@@ -10,10 +10,24 @@ const path = require('path');
 const { mongoose } = require('./database');
 const swagger = require('swagger-node-express');
 const bodyParser= require('body-parser');
+const redis = require('redis');
+
 // const swaggerDocument = require('./swagger.json');
 
 // Settings process.Env.PORT
 app.set('port', process.env.PORT || 4100);
+app.set('portRedis', process.env.PORT || 17401);
+app.set('hostRedis', 'redis-17401.c85.us-east-1-2.ec2.cloud.redislabs.com');
+
+const redisPassword = "HPiUxfAVuQbPTDyAUkVByiarnaFkPpEn" ; 
+const client = redis.createClient({
+          port: app.get('portRedis'),
+          host : app.get('hostRedis'),  
+          no_ready_check: true,
+          auth_pass: redisPassword,                                                                                                                                                           
+});       
+
+// var client = redis.createClient(app.get('portRedis'), app.get('hostRedis'));
 
 // Middlewares
 app.use(morgan('dev'));
@@ -63,6 +77,14 @@ swagger.configure(applicationUrl, '1.0.0');
 
 //Static files
 app.use(express.static(path.join(__dirname,'public')));
+
+client.on('connect', function() {
+    console.log('Redis client connected');
+});
+
+client.on('error', function (err) {
+    console.log('Something went wrong ' + err);
+});
 
 //Starting server at Port
 app.listen(app.get('port'), () => {

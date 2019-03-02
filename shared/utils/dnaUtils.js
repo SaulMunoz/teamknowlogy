@@ -15,9 +15,7 @@ module.exports = function (expresion, arrayDNA) {
             console.log("No Match", false);
             return false;
         }
-    }
-    else
-    {
+    } else {
         return false;
     }
 
@@ -31,20 +29,25 @@ module.exports = function (expresion, arrayDNA) {
  * @param {*} expressions 
  */
 function matchInArray(patternMatch, arrayCombinations) {
-    
-    var len = arrayCombinations.length,
-        i = 0;
 
-    for (; i < len; i++) {
-        if (arrayCombinations[i].match(patternMatch)) {
-            console.log("Si entró");
-            return true;
+    if (arrayCombinations && arrayCombinations.length > 0) {
+        var len = arrayCombinations.length,
+            i = 0;
+
+        for (; i < len; i++) {
+            if (arrayCombinations[i].match(patternMatch)) {
+                console.log("Si entró");
+                return true;
+            }
         }
     }
-
     return false;
 
 }
+
+
+module.exports = matchInArray;
+
 
 /**
  * join array in string without commmas, so pattern search only once
@@ -54,16 +57,20 @@ function matchInArray(patternMatch, arrayCombinations) {
  */
 function matchInArrayToString(patternMatch, arrayCombinations) {
 
-    
     var len = arrayCombinations.length,
         i = 0;
     var stringCombinations = arrayCombinations.join("");
+
+    console.log("stringCombinations", stringCombinations);
 
     if (stringCombinations.match(patternMatch)) {
         console.log("Si entró");
         return true;
     }
-    
+
     return false;
 
 }
+
+
+module.exports = matchInArrayToString;

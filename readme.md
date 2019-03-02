@@ -74,12 +74,6 @@ Response →
 
 ```
 
-in case api verifies mutation, the operation returns HTTP 200-OK, in case api dont't verifies mutation returns 403-Forbidden
-
-POST → /mutation/
-{
-“dna”:["ATGCGA","CAGTGC","TTATGT","AGAAGG","CCCCTA","TCACTG"]
-}
 ### Todos
 
  - Add security to access api
